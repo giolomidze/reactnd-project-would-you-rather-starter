@@ -1,9 +1,10 @@
 {
-  "name": "chirper",
+  "name": "would-you-rather",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "cross-env": "^5.2.0",
+    "loadash": "^1.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
