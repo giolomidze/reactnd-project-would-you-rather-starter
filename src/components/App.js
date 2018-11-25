@@ -19,15 +19,22 @@ class App extends Component {
         <BrowserRouter>
           {this.props.loading === true ? null : (
             <Switch>
-              <Route
-                path="/home/:id"
-                render={() => (
-                  <div>
-                    <div>{this.props.authedUser && <Dashboard />}</div>
-                  </div>
-                )}
-              />
-              <Route path="/questions/:id" exact component={QuestionInfo} />
+              {this.props.authedUser && (
+                <Fragment>
+                  <Route
+                    exact
+                    path="/"
+                    render={() => (
+                      <div>
+                        <div>
+                          <Dashboard />}
+                        </div>
+                      </div>
+                    )}
+                  />
+                  <Route exact path="/questions/:id" component={QuestionInfo} />
+                </Fragment>
+              )}
             </Switch>
           )}
         </BrowserRouter>

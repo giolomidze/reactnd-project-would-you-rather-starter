@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formatQuestion } from '../utils/helpers';
+import { withRouter } from 'react-router-dom';
 
 class Question extends Component {
+  onClick(e, id) {
+    e.preventDefault();
+    this.props.history.push(`/questions/${id}`);
+  }
   render() {
-    const { question } = this.props;
+    const { question, id } = this.props;
     return (
       <div className="tweet">
         <div className="col-md-3">
@@ -27,7 +32,9 @@ class Question extends Component {
               OptionTwo: {question.text2}
             </div>
             <div className="btnHead">
-              <button>View Poll</button>
+              <button onClick={event => this.onClick(event, id)}>
+                View Poll
+              </button>
             </div>
           </div>
         </div>
@@ -44,4 +51,4 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));
