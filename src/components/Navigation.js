@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOutUser } from '../actions/authedUser';
 
 class Navigation extends Component {
+  logOut = () => {
+    const { dispatch } = this.props;
+    dispatch(logOutUser());
+  };
+
   render() {
     return (
       <div>
@@ -13,7 +20,9 @@ class Navigation extends Component {
             <Link to="/add">New Question</Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link onClick={this.logOut} to="/login">
+              Logout
+            </Link>
           </li>
         </ul>
       </div>
@@ -21,4 +30,12 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+function mapStateToProps(state) {
+  const { authedUser, users } = state;
+  return {
+    authedUser,
+    users,
+  };
+}
+
+export default connect(mapStateToProps)(Navigation);
