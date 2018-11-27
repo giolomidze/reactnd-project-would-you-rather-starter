@@ -2,24 +2,67 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import QuestionList from './QuestionList';
 
+const unansweredQuestionsTab = 'unansweredQuestionsTab';
+const answeredQuestionsTab = 'answeredQuestionsTab';
+
 class Dashboard extends Component {
+  state = {
+    tab: answeredQuestionsTab,
+  };
+
+  changeTab(tab) {
+    if (tab !== this.state.tab) {
+      this.setState({ tab: tab });
+    }
+  }
+
   render() {
     const { unansweredQuestions, answeredQuestions, loading } = this.props;
 
     return (
       <Fragment>
         <p>Dashboard Component</p>
+        <ul className="nav">
+          <li className="nav-item">
+            <a
+              className={`nav-link ${
+                this.state.tab === answeredQuestionsTab ? 'active' : ''
+              }`}
+              href="#"
+              onClick={() => {
+                this.changeTab(answeredQuestionsTab);
+              }}
+            >
+              Answered Questions
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              className={`nav-link ${
+                this.state.tab === unansweredQuestionsTab ? 'active' : ''
+              }`}
+              href="#"
+              onClick={() => {
+                this.changeTab(unansweredQuestionsTab);
+              }}
+            >
+              Unanswered Questions
+            </a>
+          </li>
+        </ul>
 
         {!loading && (
           <Fragment>
-            <div>
-              <h3 className="center">Answered Questions</h3>{' '}
+            {this.state.tab === answeredQuestionsTab ? (
               <QuestionList questions={answeredQuestions} />
-            </div>
-            <div>
-              <h3 className="center">Unanswered Questions</h3>
+            ) : (
+              ''
+            )}
+            {this.state.tab === unansweredQuestionsTab ? (
               <QuestionList questions={unansweredQuestions} />
-            </div>
+            ) : (
+              ''
+            )}
           </Fragment>
         )}
       </Fragment>

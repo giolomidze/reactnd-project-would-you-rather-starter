@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { handleQuestionData, handleUsersData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
 import Dashboard from './Dashboard';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import QuestionInfo from './QuestionInfo';
+import NewQuestion from './NewQuestion';
+import Navigation from './Navigation';
+import Login from './Login';
 
 class App extends Component {
   componentDidMount() {
@@ -18,24 +21,34 @@ class App extends Component {
         <LoadingBar />
         <BrowserRouter>
           {this.props.loading === true ? null : (
-            <Switch>
-              {this.props.authedUser && (
-                <Fragment>
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      <div>
+            <Fragment>
+              <Switch>
+                <Route exact path="/login" component={Login} />
+                {this.props.authedUser && (
+                  <Fragment>
+                    <Navigation />
+                    <Route
+                      exact
+                      path="/"
+                      render={() => (
                         <div>
-                          <Dashboard />}
+                          <div>
+                            <Dashboard />}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  />
-                  <Route exact path="/questions/:id" component={QuestionInfo} />
-                </Fragment>
-              )}
-            </Switch>
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/questions/:id"
+                      component={QuestionInfo}
+                    />
+                    <Route path="/add" exact component={NewQuestion} />
+                  </Fragment>
+                )}
+                <Redirect from="*" to="/login" />
+              </Switch>
+            </Fragment>
           )}
         </BrowserRouter>
       </Fragment>
@@ -43,9 +56,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    loading: authedUser === null,
+    loading: users === null,
     authedUser,
   };
 }
