@@ -10,8 +10,10 @@ class Navigation extends Component {
   };
 
   render() {
+    const { authedUser, users } = this.props;
     return (
       <div>
+        {authedUser && <h4> Hello, {users[authedUser]['name']}! </h4>}
         <ul>
           <li>
             <Link to="/">Home</Link>
