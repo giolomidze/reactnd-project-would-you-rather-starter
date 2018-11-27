@@ -31,6 +31,7 @@ class NewQuestion extends Component {
       )
     ).then(this.props.history.push(`/`));
   };
+
   render() {
     return (
       <div>
