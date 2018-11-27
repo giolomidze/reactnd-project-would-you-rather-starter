@@ -31,10 +31,8 @@ class App extends Component {
                       exact
                       path="/"
                       render={() => (
-                        <div>
-                          <div>
-                            <Dashboard />}
-                          </div>
+                        <div className="container">
+                          <Dashboard />
                         </div>
                       )}
                     />

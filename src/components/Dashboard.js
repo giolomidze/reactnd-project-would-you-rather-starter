@@ -21,50 +21,53 @@ class Dashboard extends Component {
 
     return (
       <Fragment>
-        <p>Dashboard Component</p>
-        <ul className="nav">
-          <li className="nav-item">
-            <a
-              className={`nav-link ${
-                this.state.tab === answeredQuestionsTab ? 'active' : ''
-              }`}
-              href="#"
-              onClick={() => {
-                this.changeTab(answeredQuestionsTab);
-              }}
-            >
-              Answered Questions
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className={`nav-link ${
-                this.state.tab === unansweredQuestionsTab ? 'active' : ''
-              }`}
-              href="#"
-              onClick={() => {
-                this.changeTab(unansweredQuestionsTab);
-              }}
-            >
-              Unanswered Questions
-            </a>
-          </li>
-        </ul>
+        <div className="row">
+          <div className="col-sm text-center">
+            <ul className="list-inline">
+              <li className="list-inline-item">
+                <a
+                  className={`nav-link ${
+                    this.state.tab === answeredQuestionsTab ? 'active' : ''
+                  }`}
+                  href="#"
+                  onClick={() => {
+                    this.changeTab(answeredQuestionsTab);
+                  }}
+                >
+                  Answered Questions
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a
+                  className={`nav-link ${
+                    this.state.tab === unansweredQuestionsTab ? 'active' : ''
+                  }`}
+                  href="#"
+                  onClick={() => {
+                    this.changeTab(unansweredQuestionsTab);
+                  }}
+                >
+                  Unanswered Questions
+                </a>
+              </li>
+            </ul>
 
-        {!loading && (
-          <Fragment>
-            {this.state.tab === answeredQuestionsTab ? (
-              <QuestionList questions={answeredQuestions} />
-            ) : (
-              ''
+            {!loading && (
+              <Fragment>
+                {this.state.tab === answeredQuestionsTab ? (
+                  <QuestionList questions={answeredQuestions} />
+                ) : (
+                  ''
+                )}
+                {this.state.tab === unansweredQuestionsTab ? (
+                  <QuestionList questions={unansweredQuestions} />
+                ) : (
+                  ''
+                )}
+              </Fragment>
             )}
-            {this.state.tab === unansweredQuestionsTab ? (
-              <QuestionList questions={unansweredQuestions} />
-            ) : (
-              ''
-            )}
-          </Fragment>
-        )}
+          </div>
+        </div>
       </Fragment>
     );
   }
