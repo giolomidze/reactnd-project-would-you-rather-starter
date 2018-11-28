@@ -7,7 +7,7 @@ const answeredQuestionsTab = 'answeredQuestionsTab';
 
 class Dashboard extends Component {
   state = {
-    tab: answeredQuestionsTab,
+    tab: unansweredQuestionsTab,
   };
 
   changeTab(tab) {
