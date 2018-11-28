@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logOutUser } from '../actions/authedUser';
 
@@ -12,21 +12,29 @@ class Navigation extends Component {
   render() {
     const { authedUser, users } = this.props;
     return (
-      <div>
-        {authedUser && <h4> Hello, {users[authedUser]['name']}! </h4>}
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/add">New Question</Link>
-          </li>
-          <li>
-            <Link onClick={this.logOut} to="/login">
-              Logout
-            </Link>
-          </li>
-        </ul>
+      <div className="row">
+        <div className="col-sm text-center">
+          {authedUser && (
+            <h4 className="center"> Hello, {users[authedUser]['name']}! </h4>
+          )}
+          <ul className="list-inline">
+            <li className="list-inline-item">
+              <NavLink exact to="/" className="nav-link">
+                Home
+              </NavLink>
+            </li>
+            <li className="list-inline-item">
+              <NavLink exact to="/add" className="nav-link">
+                New Question
+              </NavLink>
+            </li>
+            <li className="list-inline-item">
+              <Link onClick={this.logOut} to="#">
+                Logout
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
