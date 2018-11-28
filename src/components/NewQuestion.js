@@ -5,16 +5,16 @@ import { handleCreateQuestion } from '../actions/shared';
 
 class NewQuestion extends Component {
   state = {
-    answerTwo: '',
-    answerOne: '',
+    optionTwo: '',
+    optionOne: '',
   };
 
-  handleAnswerOneChange = e => {
-    this.setState({ answerOne: e.target.value });
+  handleOptionOneChange = e => {
+    this.setState({ optionOne: e.target.value });
   };
 
-  handleAnswerTwoChange = e => {
-    this.setState({ answerTwo: e.target.value });
+  handleOptionTwoChange = e => {
+    this.setState({ optionTwo: e.target.value });
   };
 
   onClick = e => {
@@ -24,8 +24,8 @@ class NewQuestion extends Component {
       handleCreateQuestion(
         {
           author: authedUser,
-          optionOneText: this.state.answerOne,
-          optionTwoText: this.state.answerTwo,
+          optionOneText: this.state.optionOne,
+          optionTwoText: this.state.optionTwo,
         },
         user
       )
@@ -34,29 +34,39 @@ class NewQuestion extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <input
-            type="text"
-            id="answerOne"
-            className="options-input"
-            name="answerOne"
-            onChange={this.handleAnswerOneChange}
-            value={this.state.answerOne}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="answerTwo"
-            className="options-input"
-            name="answerTwo"
-            onChange={this.handleAnswerTwoChange}
-            value={this.state.answerTwo}
-          />
-        </div>
-        <div>
-          <button onClick={this.onClick}>Submit</button>
+      <div className="row">
+        <div className="col-sm text-center">
+          <div className="col">
+            <div className="form-group">
+              <input
+                type="text"
+                id="optionOne"
+                name="optionOne"
+                onChange={this.handleOptionOneChange}
+                value={this.state.optionOne}
+                className="form-control"
+                placeholder="Option One"
+              />
+            </div>
+          </div>
+          <div className="col">
+            <div className="form-group">
+              <input
+                type="text"
+                id="optionTwo"
+                name="optionTwo"
+                onChange={this.handleOptionTwoChange}
+                value={this.state.optionTwo}
+                className="form-control"
+                placeholder="Option Two"
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <button className="btn btn-primary" onClick={this.onClick}>
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     );

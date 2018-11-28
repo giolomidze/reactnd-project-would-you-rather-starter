@@ -11,30 +11,32 @@ class Question extends Component {
   render() {
     const { question, id } = this.props;
     return (
-      <div className="tweet">
-        <div className="col-md-3">
-          <img
-            src={question.avatar}
-            className="avatar"
-            alt={`Avatar of ${question.name}`}
-          />
-        </div>
-        <div className="col-md-9" style={{ width: '100%' }}>
-          <div className="question">
-            <span>{question.name} asks:</span>
+      <div className="row">
+        <div className="col-sm text-center">
+          <div>
+            <img
+              src={question.avatar}
+              className="avatar"
+              alt={`Avatar of ${question.name}`}
+            />
           </div>
           <div>
-            <div className="heading-3">Would you Rather?</div>
-            <div className="col-md-9 col-md-offset-3">
-              OptionOne: {question.text1}
+            <div>
+              <span>{question.name} asks:</span>
             </div>
-            <div className="col-md-9 col-md-offset-3">
-              OptionTwo: {question.text2}
-            </div>
-            <div className="btnHead">
-              <button onClick={event => this.onClick(event, id)}>
-                View Poll
-              </button>
+            <div>
+              <div>Would you Rather?</div>
+              <div>Option One: {question.text1}</div>
+              <div>Option Two: {question.text2}</div>
+              <div>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={event => this.onClick(event, id)}
+                >
+                  View Poll
+                </button>
+              </div>
             </div>
           </div>
         </div>
