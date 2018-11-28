@@ -25,7 +25,10 @@ class Login extends Component {
               >
                 <div id={user}>
                   <div>
-                    <img src={users[user]['avatarURL']} />
+                    <img
+                      src={users[user]['avatarURL']}
+                      alt={users[user]['name']}
+                    />
                   </div>
                   <div className="center">{users[user]['name']} </div>
                 </div>
