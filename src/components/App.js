@@ -21,32 +21,24 @@ class App extends Component {
         <LoadingBar />
         <BrowserRouter>
           {this.props.loading === true ? null : (
-            <Fragment>
+            <div className="container">
               <Switch>
                 <Route exact path="/login" component={Login} />
                 {this.props.authedUser && (
                   <Fragment>
                     <Navigation />
-                    <Route
-                      exact
-                      path="/"
-                      render={() => (
-                        <div className="container">
-                          <Dashboard />
-                        </div>
-                      )}
-                    />
+                    <Route exact path="/" render={() => <Dashboard />} />
                     <Route
                       exact
                       path="/questions/:id"
                       component={QuestionInfo}
                     />
-                    <Route path="/add" exact component={NewQuestion} />
+                    <Route exact path="/add" component={NewQuestion} />
                   </Fragment>
                 )}
                 <Redirect from="*" to="/login" />
               </Switch>
-            </Fragment>
+            </div>
           )}
         </BrowserRouter>
       </Fragment>
