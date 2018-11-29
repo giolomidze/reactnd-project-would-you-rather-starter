@@ -21,7 +21,11 @@ class LeaderBoard extends Component {
               {users.map((user, index) => {
                 return (
                   <li key={user.id}>
-                    <img className="avatar" src={user.avatarURL} />
+                    <img
+                      className="avatar"
+                      src={user.avatarURL}
+                      alt={user.name}
+                    />
                     <p>{user.name}</p>
                     <p>Asked: {user.questions.length}</p>
                     <p>Answered: {Object.keys(user.answers).length}</p>
