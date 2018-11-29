@@ -18,7 +18,7 @@ class NewQuestion extends Component {
     this.setState({ optionTwo: e.target.value });
   };
 
-  onClick = e => {
+  handleSubmit = e => {
     e.preventDefault();
     const { authedUser, dispatch, user } = this.props;
 
@@ -50,7 +50,7 @@ class NewQuestion extends Component {
         <Navigation />
         <div className="row">
           <div className="col-sm text-center">
-            <form onSubmit={this.onClick}>
+            <form onSubmit={this.handleSubmit}>
               <div className="col">
                 <div className="form-group">
                   <input
