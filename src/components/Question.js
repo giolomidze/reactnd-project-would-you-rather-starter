@@ -25,7 +25,7 @@ class Question extends Component {
               <h5>{question.name} asks:</h5>
             </div>
             <div>
-              <h6>Would you Rather?</h6>
+              <h6>Would you Rather</h6>
               <div>
                 {question.optionOne.text} or {question.optionTwo.text}?
               </div>
