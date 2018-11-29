@@ -14,18 +14,14 @@ class Question extends Component {
       <div className="row">
         <div className="col-sm text-center">
           <div>
-            <img
-              src={question.avatar}
-              className="avatar"
-              alt={`Avatar of ${question.name}`}
-            />
+            <img src={question.avatar} className="avatar" alt={question.name} />
           </div>
           <div>
             <div>
-              <span>{question.name} asks:</span>
+              <h5>{question.name} asks:</h5>
             </div>
             <div>
-              <div>Would you Rather?</div>
+              <h6>Would you Rather?</h6>
               <div>Option One: {question.text1}</div>
               <div>Option Two: {question.text2}</div>
               <div>
