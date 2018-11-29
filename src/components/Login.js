@@ -17,7 +17,7 @@ class Login extends Component {
       <div id="login" className="row">
         <div className="col-sm text-center">
           <div className="alert alert-primary" role="alert">
-            <h5>Click on one of the users to login</h5>
+            <h6>Click on one of the users to login</h6>
           </div>
           <ul className="list-inline">
             {Object.keys(users).map(user => {

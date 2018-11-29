@@ -8,6 +8,7 @@ import QuestionInfo from './QuestionInfo';
 import NewQuestion from './NewQuestion';
 import Login from './Login';
 import Leaderboard from './Leaderboard';
+import Error from './Error';
 import 'core-js';
 
 class App extends Component {
@@ -27,17 +28,7 @@ class App extends Component {
             <Route exact path="/questions/:id" component={QuestionInfo} />
             <Route exact path="/add" component={NewQuestion} />
             <Route exact path="/leaderboard" component={Leaderboard} />
-            <Route
-              exact
-              path="/error"
-              render={() => {
-                return (
-                  <Fragment>
-                    <div>404 error</div>
-                  </Fragment>
-                );
-              }}
-            />
+            <Route exact path="/error" component={Error} />
           </div>
         </BrowserRouter>
       </Fragment>
