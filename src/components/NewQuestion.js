@@ -19,8 +19,13 @@ class NewQuestion extends Component {
   };
 
   onClick = e => {
-    const { authedUser, dispatch, user } = this.props;
     e.preventDefault();
+    const { authedUser, dispatch, user } = this.props;
+
+    if (this.state.optionOne.length < 1 || this.state.optionTwo < 1) {
+      return false;
+    }
+
     dispatch(
       handleCreateQuestion(
         {
@@ -45,37 +50,41 @@ class NewQuestion extends Component {
         <Navigation />
         <div className="row">
           <div className="col-sm text-center">
-            <div className="col">
-              <div className="form-group">
-                <input
-                  type="text"
-                  id="optionOne"
-                  name="optionOne"
-                  onChange={this.handleOptionOneChange}
-                  value={this.state.optionOne}
-                  className="form-control"
-                  placeholder="Option One"
-                />
+            <form onSubmit={this.onClick}>
+              <div className="col">
+                <div className="form-group">
+                  <input
+                    required
+                    type="text"
+                    id="optionOne"
+                    name="optionOne"
+                    onChange={this.handleOptionOneChange}
+                    value={this.state.optionOne}
+                    className="form-control"
+                    placeholder="Option One"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="col">
-              <div className="form-group">
-                <input
-                  type="text"
-                  id="optionTwo"
-                  name="optionTwo"
-                  onChange={this.handleOptionTwoChange}
-                  value={this.state.optionTwo}
-                  className="form-control"
-                  placeholder="Option Two"
-                />
+              <div className="col">
+                <div className="form-group">
+                  <input
+                    required
+                    type="text"
+                    id="optionTwo"
+                    name="optionTwo"
+                    onChange={this.handleOptionTwoChange}
+                    value={this.state.optionTwo}
+                    className="form-control"
+                    placeholder="Option Two"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="form-group">
-              <button className="btn btn-primary" onClick={this.onClick}>
-                Submit
-              </button>
-            </div>
+              <div className="form-group">
+                <button className="btn btn-primary" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </Fragment>
