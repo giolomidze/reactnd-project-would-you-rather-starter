@@ -9,9 +9,9 @@ class QuestionList extends Component {
       <div>
         <h3 className="center">Your Timeline</h3>
         <ul>
-          {questions.map(id => (
-            <li key={id}>
-              <Question id={id} />
+          {questions.map(question => (
+            <li key={question.id}>
+              <Question key={question.id} id={question.id} />
             </li>
           ))}
         </ul>
@@ -20,12 +20,12 @@ class QuestionList extends Component {
   }
 }
 
-function mapStateToProps({ questions, users, authedUser }) {
-  const unansweredQues = users[authedUser].questions;
+function mapStateToProps({ questions, users, authedUser }, { id }) {
+  const question = questions[id];
+
   return {
-    questionIds: unansweredQues.sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
-    ),
+    users,
+    question,
   };
 }
 

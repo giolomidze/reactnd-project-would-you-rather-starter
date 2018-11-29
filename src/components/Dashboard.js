@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import QuestionList from './QuestionList';
+import Navigation from './Navigation';
 
 const unansweredQuestionsTab = 'unansweredQuestionsTab';
 const answeredQuestionsTab = 'answeredQuestionsTab';
@@ -17,10 +19,15 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { unansweredQuestions, answeredQuestions, loading } = this.props;
+    const { questionsUnanswered, questionsAnswered, authedUser } = this.props;
+
+    if (!authedUser) {
+      return <Redirect to="/login" />;
+    }
 
     return (
       <Fragment>
+        <Navigation />
         <div className="row">
           <div className="col-sm text-center">
             <ul className="list-inline">
@@ -52,20 +59,18 @@ class Dashboard extends Component {
               </li>
             </ul>
 
-            {!loading && (
-              <Fragment>
-                {this.state.tab === answeredQuestionsTab ? (
-                  <QuestionList questions={answeredQuestions} />
-                ) : (
-                  ''
-                )}
-                {this.state.tab === unansweredQuestionsTab ? (
-                  <QuestionList questions={unansweredQuestions} />
-                ) : (
-                  ''
-                )}
-              </Fragment>
-            )}
+            <Fragment>
+              {this.state.tab === answeredQuestionsTab ? (
+                <QuestionList questions={questionsAnswered} />
+              ) : (
+                ''
+              )}
+              {this.state.tab === unansweredQuestionsTab ? (
+                <QuestionList questions={questionsUnanswered} />
+              ) : (
+                ''
+              )}
+            </Fragment>
           </div>
         </div>
       </Fragment>
@@ -73,30 +78,41 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { authedUser, questions, users } = state;
-
-  if (Object.keys(questions).length < 1) {
-    return {
-      loading: true,
-    };
-  }
-
-  const answeredQuestions = Object.keys(users[authedUser].answers).sort(
+function mapStateToProps({ questions, authedUser }) {
+  const questionIds = Object.keys(questions).sort(
     (a, b) => questions[b].timestamp - questions[a].timestamp
   );
-  const unansweredQuestions = Object.keys(questions)
-    .filter(question => !answeredQuestions.includes(question))
-    .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
+
+  const questionsArray = [];
+
+  questionIds.forEach(id => {
+    questionsArray[questionsArray.length] = questions[id];
+  });
+
+  let questionsAnswered = [];
+  let questionsUnanswered = [];
+
+  if (authedUser) {
+    questionsUnanswered = questionsArray.filter(question => {
+      return (
+        !question.optionOne.votes.includes(authedUser) &&
+        !question.optionTwo.votes.includes(authedUser)
+      );
+    });
+
+    questionsAnswered = questionsArray.filter(question => {
+      return (
+        question.optionOne.votes.includes(authedUser) ||
+        question.optionTwo.votes.includes(authedUser)
+      );
+    });
+  }
 
   return {
-    questions,
-    users,
-    answeredQuestions,
-    unansweredQuestions,
+    questionsUnanswered,
+    questionsAnswered,
     authedUser,
-    loading: false,
   };
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps)(Dashboard));

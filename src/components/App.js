@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { handleQuestionData, handleUsersData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
 import Dashboard from './Dashboard';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import QuestionInfo from './QuestionInfo';
 import NewQuestion from './NewQuestion';
 import Navigation from './Navigation';
@@ -20,35 +20,21 @@ class App extends Component {
       <Fragment>
         <LoadingBar />
         <BrowserRouter>
-          {this.props.loading === true ? null : (
-            <div className="container">
-              <Switch>
-                <Route exact path="/login" component={Login} />
-                {this.props.authedUser && (
-                  <Fragment>
-                    <Navigation />
-                    <Route exact path="/" render={() => <Dashboard />} />
-                    <Route
-                      exact
-                      path="/questions/:id"
-                      component={QuestionInfo}
-                    />
-                    <Route exact path="/add" component={NewQuestion} />
-                  </Fragment>
-                )}
-                <Redirect from="*" to="/login" />
-              </Switch>
-            </div>
-          )}
+          <div className="container">
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/questions/:id" component={QuestionInfo} />
+            <Route exact path="/add" component={NewQuestion} />
+          </div>
         </BrowserRouter>
       </Fragment>
     );
   }
 }
 
-function mapStateToProps({ users, authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
-    loading: users === null,
+    loading: authedUser === null,
     authedUser,
   };
 }

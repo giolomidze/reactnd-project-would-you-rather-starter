@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
+import { withRouter } from 'react-router-dom';
 import { generateUID } from '../utils/helpers';
 
 class Login extends Component {
@@ -15,7 +16,7 @@ class Login extends Component {
     return (
       <div id="login" className="row">
         <div className="col-sm text-center">
-          <div class="alert alert-primary" role="alert">
+          <div className="alert alert-primary" role="alert">
             <h5>Click on one of the users to login</h5>
           </div>
           <ul className="list-inline">
@@ -54,4 +55,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

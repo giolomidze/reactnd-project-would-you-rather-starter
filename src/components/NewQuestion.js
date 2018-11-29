@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { handleCreateQuestion } from '../actions/shared';
+import Navigation from './Navigation';
 
 class NewQuestion extends Component {
   state = {
@@ -33,42 +34,51 @@ class NewQuestion extends Component {
   };
 
   render() {
+    const { authedUser } = this.props;
+
+    if (!authedUser) {
+      return <Redirect to="/login" />;
+    }
+
     return (
-      <div className="row">
-        <div className="col-sm text-center">
-          <div className="col">
-            <div className="form-group">
-              <input
-                type="text"
-                id="optionOne"
-                name="optionOne"
-                onChange={this.handleOptionOneChange}
-                value={this.state.optionOne}
-                className="form-control"
-                placeholder="Option One"
-              />
+      <Fragment>
+        <Navigation />
+        <div className="row">
+          <div className="col-sm text-center">
+            <div className="col">
+              <div className="form-group">
+                <input
+                  type="text"
+                  id="optionOne"
+                  name="optionOne"
+                  onChange={this.handleOptionOneChange}
+                  value={this.state.optionOne}
+                  className="form-control"
+                  placeholder="Option One"
+                />
+              </div>
             </div>
-          </div>
-          <div className="col">
-            <div className="form-group">
-              <input
-                type="text"
-                id="optionTwo"
-                name="optionTwo"
-                onChange={this.handleOptionTwoChange}
-                value={this.state.optionTwo}
-                className="form-control"
-                placeholder="Option Two"
-              />
+            <div className="col">
+              <div className="form-group">
+                <input
+                  type="text"
+                  id="optionTwo"
+                  name="optionTwo"
+                  onChange={this.handleOptionTwoChange}
+                  value={this.state.optionTwo}
+                  className="form-control"
+                  placeholder="Option Two"
+                />
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" onClick={this.onClick}>
-              Submit
-            </button>
+            <div className="form-group">
+              <button className="btn btn-primary" onClick={this.onClick}>
+                Submit
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

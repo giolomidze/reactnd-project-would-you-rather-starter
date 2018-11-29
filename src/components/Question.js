@@ -9,12 +9,16 @@ class Question extends Component {
     this.props.history.push(`/questions/${id}`);
   }
   render() {
-    const { question, id } = this.props;
+    const { question, id, users } = this.props;
     return (
       <div className="row">
         <div className="col-sm text-center">
           <div>
-            <img src={question.avatar} className="avatar" alt={question.name} />
+            <img
+              src={users[question.author].avatarURL}
+              className="avatar"
+              alt={question.name}
+            />
           </div>
           <div>
             <div>
@@ -22,8 +26,9 @@ class Question extends Component {
             </div>
             <div>
               <h6>Would you Rather?</h6>
-              <div>Option One: {question.text1}</div>
-              <div>Option Two: {question.text2}</div>
+              <div>
+                {question.optionOne.text} or {question.optionTwo.text}?
+              </div>
               <div>
                 <button
                   type="button"
@@ -41,11 +46,12 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, users, questions }, { id }) {
+function mapStateToProps({ users, questions }, { id }) {
   const question = questions[id];
+
   return {
-    authedUser,
-    question: formatQuestion(question, users[question.author], authedUser),
+    users,
+    question,
   };
 }
 

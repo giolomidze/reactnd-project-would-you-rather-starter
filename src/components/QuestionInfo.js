@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getQuestionInfo } from '../utils/helpers';
 import { answerQuestions } from '../actions/shared';
+import Navigation from './Navigation';
 
 class QuestionInfo extends Component {
   state = {
@@ -20,8 +22,14 @@ class QuestionInfo extends Component {
 
   render() {
     const { isAnswered, question, users, questionInfo, loading } = this.props;
+
+    if (question === undefined) {
+      return <Redirect to="/error" />;
+    }
+
     return (
       <Fragment>
+        <Navigation />
         {!loading && (
           <div className="row">
             <div className="col-sm text-center">
@@ -32,7 +40,7 @@ class QuestionInfo extends Component {
                   alt="avatar"
                 />
               </div>
-
+              <p>Would You Rather</p>
               {isAnswered ? (
                 <div className="card">
                   <div className="card-body">
@@ -122,6 +130,7 @@ class QuestionInfo extends Component {
 
 function mapStateToProps({ authedUser, questions, users }, props) {
   const { id } = props.match.params;
+  const question = questions[id];
 
   const user = users[authedUser];
 
@@ -130,8 +139,6 @@ function mapStateToProps({ authedUser, questions, users }, props) {
       loading: true,
     };
   }
-
-  const question = questions[id];
 
   const questionInfo = getQuestionInfo(users, question);
   const isAnswered = Object.keys(user.answers).includes(id);
