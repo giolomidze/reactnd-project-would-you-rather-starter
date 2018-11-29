@@ -21,7 +21,18 @@ class QuestionInfo extends Component {
   };
 
   render() {
-    const { isAnswered, question, users, questionInfo, loading } = this.props;
+    const {
+      isAnswered,
+      question,
+      users,
+      questionInfo,
+      loading,
+      authedUser,
+    } = this.props;
+
+    if (authedUser === undefined) {
+      return <Redirect to="/login" />;
+    }
 
     if (question === undefined) {
       return <Redirect to="/error" />;
@@ -40,7 +51,6 @@ class QuestionInfo extends Component {
                   alt="avatar"
                 />
               </div>
-              <p>Would You Rather</p>
               {isAnswered ? (
                 <div className="card">
                   <div className="card-body">
@@ -77,6 +87,7 @@ class QuestionInfo extends Component {
                 </div>
               ) : (
                 <div>
+                  <p>Would you Rather</p>
                   <form onSubmit={this.onClick}>
                     <div className="form-group">
                       <div className="form-check">
