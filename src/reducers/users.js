@@ -25,7 +25,7 @@ export default function users(state = {}, action) {
     case NEW_USER_QUESTION:
       const { author, id } = action.question;
       const { user } = action;
-      console.log('action', action);
+
       return {
         ...state,
         [author]: {

@@ -16,7 +16,6 @@ class LeaderBoard extends Component {
         <Navigation />
         <div className="row">
           <div className="col-sm text-center">
-            {console.log(users)}
             <ul>
               {users.map((user, index) => {
                 return (
