@@ -6,8 +6,9 @@ import Dashboard from './Dashboard';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import QuestionInfo from './QuestionInfo';
 import NewQuestion from './NewQuestion';
-import Navigation from './Navigation';
 import Login from './Login';
+import Leaderboard from './Leaderboard';
+import 'core-js';
 
 class App extends Component {
   componentDidMount() {
