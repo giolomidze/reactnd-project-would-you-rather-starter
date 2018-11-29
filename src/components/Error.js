@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class Error extends Component {
   render() {
