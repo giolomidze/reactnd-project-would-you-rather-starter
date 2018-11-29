@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { handleQuestionData, handleUsersData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
 import Dashboard from './Dashboard';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import QuestionInfo from './QuestionInfo';
 import NewQuestion from './NewQuestion';
 import Login from './Login';
