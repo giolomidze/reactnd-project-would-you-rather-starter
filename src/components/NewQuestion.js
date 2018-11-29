@@ -81,7 +81,7 @@ class NewQuestion extends Component {
               </div>
               <div className="form-group">
                 <button className="btn btn-primary" type="submit">
-                  Submit
+                  Create
                 </button>
               </div>
             </form>
