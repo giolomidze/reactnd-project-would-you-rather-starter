@@ -21,7 +21,7 @@ class Question extends Component {
           </div>
           <div>
             <div>
-              <h5>{question.name} asks:</h5>
+              <h5>{users[question.author].name} asks:</h5>
             </div>
             <div>
               <h6>Would you Rather</h6>
