@@ -29,6 +29,11 @@ class Navigation extends Component {
               </NavLink>
             </li>
             <li className="list-inline-item">
+              <NavLink exact to="/leaderboard" className="nav-link">
+                Leaderboard
+              </NavLink>
+            </li>
+            <li className="list-inline-item">
               <Link onClick={this.logOut} to="#">
                 Logout
               </Link>

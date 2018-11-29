@@ -59,18 +59,16 @@ class Dashboard extends Component {
               </li>
             </ul>
 
-            <Fragment>
-              {this.state.tab === answeredQuestionsTab ? (
-                <QuestionList questions={questionsAnswered} />
-              ) : (
-                ''
-              )}
-              {this.state.tab === unansweredQuestionsTab ? (
-                <QuestionList questions={questionsUnanswered} />
-              ) : (
-                ''
-              )}
-            </Fragment>
+            {this.state.tab === answeredQuestionsTab ? (
+              <QuestionList questions={questionsAnswered} />
+            ) : (
+              ''
+            )}
+            {this.state.tab === unansweredQuestionsTab ? (
+              <QuestionList questions={questionsUnanswered} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </Fragment>

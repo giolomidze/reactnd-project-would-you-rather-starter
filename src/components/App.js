@@ -26,6 +26,18 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/questions/:id" component={QuestionInfo} />
             <Route exact path="/add" component={NewQuestion} />
+            <Route exact path="/leaderboard" component={Leaderboard} />
+            <Route
+              exact
+              path="/error"
+              render={() => {
+                return (
+                  <Fragment>
+                    <div>404 error</div>
+                  </Fragment>
+                );
+              }}
+            />
           </div>
         </BrowserRouter>
       </Fragment>
