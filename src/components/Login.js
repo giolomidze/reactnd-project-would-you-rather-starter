@@ -13,29 +13,34 @@ class Login extends Component {
     const { users } = this.props;
 
     return (
-      <div>
-        <h3 className="center">Click to Login</h3>
-        <ul>
-          {Object.keys(users).map(user => {
-            return (
-              <li
-                key={generateUID()}
-                className="center"
-                onClick={e => this.loginUser(e, user)}
-              >
-                <div id={user}>
-                  <div>
-                    <img
-                      src={users[user]['avatarURL']}
-                      alt={users[user]['name']}
-                    />
+      <div id="login" className="row">
+        <div className="col-sm text-center">
+          <div class="alert alert-primary" role="alert">
+            <h5>Click on one of the users to login</h5>
+          </div>
+          <ul className="list-inline">
+            {Object.keys(users).map(user => {
+              return (
+                <li
+                  className="list-inline-item"
+                  key={generateUID()}
+                  onClick={e => this.loginUser(e, user)}
+                >
+                  <div id={user}>
+                    <div>
+                      <img
+                        src={users[user]['avatarURL']}
+                        alt={users[user]['name']}
+                        className="img-thumbnail"
+                      />
+                    </div>
+                    <div className="center">{users[user]['name']} </div>
                   </div>
-                  <div className="center">{users[user]['name']} </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
