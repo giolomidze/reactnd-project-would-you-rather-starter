@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navigation from './Navigation';
@@ -12,9 +12,26 @@ class LeaderBoard extends Component {
     }
 
     return (
-      <div>
-        <Navigation /> {users.map((user, index) => user.name)}
-      </div>
+      <Fragment>
+        <Navigation />
+        <div className="row">
+          <div className="col-sm text-center">
+            {console.log(users)}
+            <ul>
+              {users.map((user, index) => {
+                return (
+                  <li key={user.id}>
+                    <img className="avatar" src={user.avatarURL} />
+                    <p>{user.name}</p>
+                    <p>Asked: {user.questions.length}</p>
+                    <p>Answered: {Object.keys(user.answers).length}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
