@@ -15,3 +15,7 @@ Simple "Would You Rather Project" application with the following features:
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+
+## Bootstrap 4
+
+This project is using [Bootstrap 4](https://github.com/twbs/bootstrap) as a front-end framework.
