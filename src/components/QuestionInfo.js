@@ -24,7 +24,6 @@ class QuestionInfo extends Component {
     const {
       isAnswered,
       question,
-      users,
       questionAuthor,
       loading,
       authedUser,
@@ -73,7 +72,7 @@ class QuestionInfo extends Component {
                     </p>
                     <p className="card-text">
                       {parseInt(
-                        (question.optionTwo.votes.length /
+                        (question.optionOne.votes.length /
                           (question.optionOne.votes.length +
                             question.optionTwo.votes.length)) *
                           100,
