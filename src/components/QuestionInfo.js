@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getQuestionInfo } from '../utils/helpers';
+import { getQuestionAuthor } from '../utils/helpers';
 import { answerQuestions } from '../actions/shared';
 import Navigation from './Navigation';
 
@@ -25,7 +25,7 @@ class QuestionInfo extends Component {
       isAnswered,
       question,
       users,
-      questionInfo,
+      questionAuthor,
       loading,
       authedUser,
     } = this.props;
@@ -54,14 +54,16 @@ class QuestionInfo extends Component {
               <div>
                 <img
                   className="avatar"
-                  src={questionInfo.avatarUrl}
+                  src={questionAuthor.avatarUrl}
                   alt="avatar"
                 />
               </div>
               {isAnswered ? (
                 <div className="card">
                   <div className="card-body">
-                    <h5 className="card-title">Asked by {questionInfo.name}</h5>
+                    <h5 className="card-title">
+                      Asked by {questionAuthor.name}
+                    </h5>
                     <h6 className="card-subtitle mb-2 text-muted">
                       Poll Results:
                     </h6>
@@ -70,10 +72,12 @@ class QuestionInfo extends Component {
                       {question.optionOne.votes.length} Votes
                     </p>
                     <p className="card-text">
-                      {Math.trunc(
-                        (question.optionOne.votes.length /
-                          Object.keys(users).length) *
-                          100
+                      {parseInt(
+                        (question.optionTwo.votes.length /
+                          (question.optionOne.votes.length +
+                            question.optionTwo.votes.length)) *
+                          100,
+                        10
                       )}
                       % people voted
                     </p>
@@ -83,10 +87,12 @@ class QuestionInfo extends Component {
                       {question.optionTwo.votes.length} Votes
                     </p>
                     <p className="card-text">
-                      {Math.trunc(
+                      {parseInt(
                         (question.optionTwo.votes.length /
-                          Object.keys(users).length) *
-                          100
+                          (question.optionOne.votes.length +
+                            question.optionTwo.votes.length)) *
+                          100,
+                        10
                       )}
                       % people voted
                     </p>
@@ -158,14 +164,15 @@ function mapStateToProps({ authedUser, questions, users }, props) {
     };
   }
 
-  const questionInfo = getQuestionInfo(users, question);
+  const questionAuthor = getQuestionAuthor(users, question);
   const isAnswered = Object.keys(user.answers).includes(id);
+
   return {
     id,
     isAnswered,
     question,
     users,
-    questionInfo,
+    questionAuthor,
     authedUser,
     loading: false,
   };

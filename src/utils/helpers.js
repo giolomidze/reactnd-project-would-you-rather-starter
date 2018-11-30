@@ -1,4 +1,4 @@
-export function getQuestionInfo(users, question) {
+export function getQuestionAuthor(users, question) {
   const author = question.author;
   const name = users[author].name;
   const avatarUrl = users[author].avatarURL;
