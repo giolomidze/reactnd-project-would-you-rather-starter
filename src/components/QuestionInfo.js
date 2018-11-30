@@ -11,9 +11,9 @@ class QuestionInfo extends Component {
   };
 
   onClick = e => {
-    const { dispatch, id, authedUser, question } = this.props;
+    const { dispatch, id, authedUser, questions } = this.props;
     e.preventDefault();
-    dispatch(answerQuestions(id, authedUser, this.state.value, question));
+    dispatch(answerQuestions(id, authedUser, this.state.value, questions[id]));
   };
 
   onChange = e => {
@@ -21,13 +21,15 @@ class QuestionInfo extends Component {
   };
 
   render() {
-    const {
-      isAnswered,
-      question,
-      questionAuthor,
-      loading,
-      authedUser,
-    } = this.props;
+    const { questions, id, loading, authedUser, users } = this.props;
+
+    if (loading) {
+      return '';
+    }
+
+    if (!questions[id]) {
+      return <Redirect to="/error" />;
+    }
 
     if (!authedUser) {
       return (
@@ -40,9 +42,10 @@ class QuestionInfo extends Component {
       );
     }
 
-    if (question === undefined) {
-      return <Redirect to="/error" />;
-    }
+    const question = questions[id];
+    const user = users[authedUser];
+    const questionAuthor = getQuestionAuthor(users, question);
+    const isAnswered = Object.keys(user.answers).includes(id);
 
     return (
       <Fragment>
@@ -153,9 +156,6 @@ class QuestionInfo extends Component {
 
 function mapStateToProps({ authedUser, questions, users }, props) {
   const { id } = props.match.params;
-  const question = questions[id];
-
-  const user = users[authedUser];
 
   if (Object.keys(questions).length < 1) {
     return {
@@ -163,16 +163,11 @@ function mapStateToProps({ authedUser, questions, users }, props) {
     };
   }
 
-  const questionAuthor = getQuestionAuthor(users, question);
-  const isAnswered = Object.keys(user.answers).includes(id);
-
   return {
     id,
-    isAnswered,
-    question,
-    users,
-    questionAuthor,
+    questions,
     authedUser,
+    users,
     loading: false,
   };
 }
