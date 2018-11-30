@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { generateUID } from '../utils/helpers';
 
 class Login extends Component {
+  state = {
+    redirectToReferrer: false,
+  };
+
   loginUser(e, user) {
     e.preventDefault();
     this.props.dispatch(setAuthedUser(user));
-    this.props.history.push('/');
+    this.setState({ redirectToReferrer: true });
   }
+
   render() {
     const { users } = this.props;
+    let { from } = this.props.location.state || { from: { pathname: '/' } };
+    let { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) return <Redirect to={from} />;
 
     return (
       <div id="login" className="row">

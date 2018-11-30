@@ -30,8 +30,15 @@ class QuestionInfo extends Component {
       authedUser,
     } = this.props;
 
-    if (authedUser === undefined) {
-      return <Redirect to="/login" />;
+    if (!authedUser) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: this.props.location },
+          }}
+        />
+      );
     }
 
     if (question === undefined) {

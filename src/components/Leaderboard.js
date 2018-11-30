@@ -8,7 +8,14 @@ class LeaderBoard extends Component {
     const { users, authedUser } = this.props;
 
     if (!authedUser) {
-      return <Redirect to="/login" />;
+      return (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: this.props.location },
+          }}
+        />
+      );
     }
 
     return (
