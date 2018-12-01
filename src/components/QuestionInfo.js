@@ -27,10 +27,6 @@ class QuestionInfo extends Component {
       return '';
     }
 
-    if (!questions[id]) {
-      return <Redirect to="/error" />;
-    }
-
     if (!authedUser) {
       return (
         <Redirect
@@ -40,6 +36,10 @@ class QuestionInfo extends Component {
           }}
         />
       );
+    }
+
+    if (!questions[id]) {
+      return <Redirect to="/error" />;
     }
 
     const question = questions[id];
